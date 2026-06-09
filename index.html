@@ -181,7 +181,6 @@
     <option value="">All orders</option>
     <option value="June #1">June #1</option>
     <option value="June #2">June #2</option>
-    <option value="Own Items">Own Items</option>
   </select>
   <select id="f-status" onchange="render()">
     <option value="">All statuses</option>
@@ -216,33 +215,26 @@
 // ── Data (fetched 9 Jun 2026 from Notion) ─────────────────
 const SALES = [
   // June #1
-  { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped", list:30,    sold:30,   cost:7.69  },
-  { name:"UA compression shirt black",     order:"June #1",   status:"Shipped", list:15,    sold:15,   cost:3.60  },
-  { name:"UA compression shirt white",     order:"June #1",   status:"Shipped", list:15,    sold:10,   cost:3.60  },
+  { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped",          list:30,    sold:30,   cost:7.69  },
+  { name:"UA compression shirt black",     order:"June #1",   status:"Shipped",          list:15,    sold:15,   cost:3.60  },
+  { name:"UA compression shirt white",     order:"June #1",   status:"Shipped",          list:15,    sold:10,   cost:3.60  },
 
   // June #2
-  { name:"UA compression shirt black #1",  order:"June #2",   status:"Listed",  list:19.99, sold:null, cost:3.60  },
-  { name:"UA compression shirt black #2",  order:"June #2",   status:"Listed",  list:19.99, sold:null, cost:3.60  },
-  { name:"UA compression shirt black #3",  order:"June #2",   status:"Listed",  list:19.99, sold:null, cost:3.60  },
-  { name:"UA compression shirt black #4",  order:"June #2",   status:"Listed",  list:19.99, sold:null, cost:3.60  },
-  { name:"Bape Polo black",                order:"June #2",   status:"Listed",  list:34.99, sold:null, cost:12.58 },
-  { name:"Bape Polo white",                order:"June #2",   status:"Listed",  list:34.99, sold:null, cost:12.58 },
-  { name:"Nike miler short set Black #1",  order:"June #2",   status:"Listed",  list:34.99, sold:null, cost:7.69  },
-  { name:"Nike miler short set Black #2",  order:"June #2",   status:"Listed",  list:34.99, sold:null, cost:7.69  },
-  { name:"Nike miler short set Green",     order:"June #2",   status:"Listed",  list:34.99, sold:null, cost:7.69  },
-  { name:"Stanley Cup Pink",               order:"June #2",   status:"Listed",  list:24.99, sold:null, cost:2.87  },
-  { name:"Stanley Cup Light Purple",       order:"June #2",   status:"Listed",  list:24.99, sold:null, cost:2.87  },
-  { name:"Stanley Cup Dune",               order:"June #2",   status:"Listed",  list:24.99, sold:null, cost:2.87  },
-  { name:"Essential shorts black #1",      order:"June #2",   status:"Listed",  list:29.99, sold:null, cost:12.75 },
-  { name:"Essential shorts black #2",      order:"June #2",   status:"Listed",  list:29.99, sold:null, cost:12.75 },
-  { name:"True Religion Supreme Polo",     order:"June #2",   status:"Listed",  list:74.99, sold:null, cost:19.26 },
-
-  // Own Items (no purchase order)
-  { name:"Stussy Jorts",                   order:"Own Items", status:"Shipped", list:20,    sold:20,   cost:0     },
-  { name:"Replay Bomber Jacket",           order:"Own Items", status:"Listed",  list:20,    sold:null, cost:0     },
-  { name:"Tommy Hilfiger knit",            order:"Own Items", status:"Listed",  list:20,    sold:null, cost:0     },
-  { name:"Versace Neoprene Sweatshirt",    order:"Own Items", status:"Listed",  list:20,    sold:null, cost:0     },
-  { name:"Diesel Jeans",                   order:"Own Items", status:"Listed",  list:20,    sold:null, cost:0     },
+  { name:"Stanley Cup Pink",               order:"June #2",   status:"Waiting Shipment", list:24.99, sold:null, cost:2.87  },
+  { name:"Stanley Cup Light Purple",       order:"June #2",   status:"Waiting Shipment", list:24.99, sold:null, cost:2.87  },
+  { name:"Stanley Cup Dune",               order:"June #2",   status:"Waiting Shipment", list:24.99, sold:null, cost:2.87  },
+  { name:"Nike miler short set Black #1",  order:"June #2",   status:"Waiting Shipment", list:34.99, sold:null, cost:7.69  },
+  { name:"Nike miler short set Black #2",  order:"June #2",   status:"Waiting Shipment", list:34.99, sold:null, cost:7.69  },
+  { name:"Nike miler short set Green",     order:"June #2",   status:"Waiting Shipment", list:34.99, sold:null, cost:7.69  },
+  { name:"UA compression shirt black #1",  order:"June #2",   status:"Waiting Shipment", list:19.99, sold:null, cost:3.60  },
+  { name:"UA compression shirt black #2",  order:"June #2",   status:"Waiting Shipment", list:19.99, sold:null, cost:3.60  },
+  { name:"UA compression shirt black #3",  order:"June #2",   status:"Waiting Shipment", list:19.99, sold:null, cost:3.60  },
+  { name:"UA compression shirt black #4",  order:"June #2",   status:"Waiting Shipment", list:19.99, sold:null, cost:3.60  },
+  { name:"Essential shorts black #1",      order:"June #2",   status:"Waiting Shipment", list:29.99, sold:null, cost:12.75 },
+  { name:"Essential shorts black #2",      order:"June #2",   status:"Waiting Shipment", list:29.99, sold:null, cost:12.75 },
+  { name:"Bape Polo black",                order:"June #2",   status:"Waiting Shipment", list:34.99, sold:null, cost:12.58 },
+  { name:"Bape Polo white",                order:"June #2",   status:"Waiting Shipment", list:34.99, sold:null, cost:12.58 },
+  { name:"True Religion Supreme Polo",     order:"June #2",   status:"Waiting Shipment", list:74.99, sold:null, cost:19.26 },
 ];
 
 // ── Helpers ───────────────────────────────────────────────
@@ -307,7 +299,7 @@ function render() {
   });
 
   // Bar — use all SALES for full picture
-  const orders = ['June #1', 'June #2', 'Own Items'];
+  const orders = ['June #1', 'June #2'];
   const realisedRev  = orders.map(o => SALES.filter(r => r.order===o && r.sold!=null).reduce((s,r)=>s+r.sold,0));
   const potentialRev = orders.map(o => SALES.filter(r => r.order===o && r.sold==null).reduce((s,r)=>s+r.list,0));
 
