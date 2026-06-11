@@ -181,6 +181,7 @@
     <option value="">All orders</option>
     <option value="June #1">June #1</option>
     <option value="June #2">June #2</option>
+    <option value="June #3">June #3</option>
   </select>
   <select id="f-status" onchange="render()">
     <option value="">All statuses</option>
@@ -207,12 +208,12 @@
 </table>
 
 <div class="footer">
-  <span>Data as of 10 Jun 2026 — ask Claude to refresh when you've added new sales</span>
+  <span>Data as of 11 Jun 2026 — ask Claude to refresh when you've added new sales</span>
   <span>Vinted Reselling</span>
 </div>
 
 <script>
-// ── Data (fetched 10 Jun 2026 from Notion) ─────────────────
+// ── Data (fetched 11 Jun 2026 from Notion) ─────────────────
 const SALES = [
   // June #1
   { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped",          list:30,       sold:30,       cost:7.69  },
@@ -299,7 +300,7 @@ function render() {
   });
 
   // Bar — use all SALES for full picture
-  const orders = ['June #1', 'June #2'];
+  const orders = ['June #1', 'June #2', 'June #3'];
   const realisedRev  = orders.map(o => SALES.filter(r => r.order===o && r.sold!=null).reduce((s,r)=>s+r.sold,0));
   const potentialRev = orders.map(o => SALES.filter(r => r.order===o && r.sold==null).reduce((s,r)=>s+r.list,0));
 
