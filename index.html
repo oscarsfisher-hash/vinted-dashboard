@@ -265,14 +265,14 @@
 <script>
 // ── Data (fetched 11 Jun 2026 from Notion) ──────────────────
 // shipping = order shipping cost ÷ number of items in that order
-// June #1: £51.39 ÷ 3 items = £17.13 per item
+// June #1: £15.43 ÷ 3 items = £5.14 per item
 // June #2: shipping not yet set (order In Basket)
-// June #3: shipping not yet set
+// June #3: no sales yet, no shipping set
 const SALES = [
   // June #1
-  { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped",          list:30,    sold:30,   cost:7.69,  shipping:17.13, dateSold:"2026-06-01" },
-  { name:"UA compression shirt black",     order:"June #1",   status:"Shipped",          list:15,    sold:15,   cost:3.60,  shipping:17.13, dateSold:"2026-06-01" },
-  { name:"UA compression shirt white",     order:"June #1",   status:"Shipped",          list:15,    sold:10,   cost:3.60,  shipping:17.13, dateSold:"2026-06-01" },
+  { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped",          list:30,    sold:30,   cost:7.69,  shipping:5.14, dateSold:"2026-06-01" },
+  { name:"UA compression shirt black",     order:"June #1",   status:"Shipped",          list:15,    sold:15,   cost:3.60,  shipping:5.14, dateSold:"2026-06-01" },
+  { name:"UA compression shirt white",     order:"June #1",   status:"Shipped",          list:15,    sold:10,   cost:3.60,  shipping:5.14, dateSold:null },
 
   // June #2
   { name:"Stanley Cup Pink",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,     dateSold:null },
