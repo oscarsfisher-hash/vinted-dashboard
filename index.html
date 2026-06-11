@@ -12,10 +12,36 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #fff;
     color: #111;
-    padding: 20px 24px;
     font-size: 13px;
     line-height: 1.4;
   }
+
+  /* ── nav ── */
+  .nav {
+    display: flex;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0 24px;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .nav-btn {
+    border: none;
+    background: none;
+    padding: 12px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #888;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-family: inherit;
+  }
+  .nav-btn:hover { color: #333; }
+  .nav-btn.active { color: #111; border-bottom-color: #111; font-weight: 500; }
+
+  .tab-panel { display: none; padding: 20px 24px; }
+  .tab-panel.active { display: block; }
 
   /* ── stats ── */
   .stats {
@@ -24,25 +50,12 @@
     gap: 10px;
     margin-bottom: 20px;
   }
-  .stat {
-    background: #f5f5f5;
-    border-radius: 8px;
-    padding: 14px 16px;
-  }
-  .stat-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    color: #999;
-    margin-bottom: 4px;
-  }
-  .stat-value {
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
-  }
+  .stat { background: #f5f5f5; border-radius: 8px; padding: 14px 16px; }
+  .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: #999; margin-bottom: 4px; }
+  .stat-value { font-size: 20px; font-weight: 600; letter-spacing: -0.5px; }
   .green { color: #16a34a; }
   .amber { color: #d97706; }
+  .red   { color: #dc2626; }
 
   /* ── charts ── */
   .charts {
@@ -51,18 +64,8 @@
     gap: 10px;
     margin-bottom: 20px;
   }
-  .chart-card {
-    background: #f5f5f5;
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .chart-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    color: #999;
-    margin-bottom: 12px;
-  }
+  .chart-card { background: #f5f5f5; border-radius: 8px; padding: 16px; }
+  .chart-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: #999; margin-bottom: 12px; }
   .chart-wrap { position: relative; }
   .donut-wrap { height: 180px; }
   .bar-wrap    { height: 180px; }
@@ -83,6 +86,7 @@
     background: #fff;
     color: #333;
     cursor: pointer;
+    font-family: inherit;
   }
   select:focus { outline: none; border-color: #999; }
 
@@ -99,42 +103,40 @@
     white-space: nowrap;
     font-weight: 500;
   }
-  tbody td {
-    padding: 9px 8px;
-    border-bottom: 1px solid #f2f2f2;
-    font-size: 12px;
-  }
+  tbody td { padding: 9px 8px; border-bottom: 1px solid #f2f2f2; font-size: 12px; }
   tbody tr:last-child td { border-bottom: none; }
   tbody tr:hover td { background: #fafafa; }
 
-  .badge {
-    display: inline-block;
-    padding: 1px 7px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 500;
-  }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10px; font-weight: 500; }
   .s-sold     { background: #dcfce7; color: #15803d; }
   .s-shipped  { background: #e0f2fe; color: #0369a1; }
   .s-listed   { background: #f1f5f9; color: #64748b; }
   .s-returned { background: #fee2e2; color: #b91c1c; }
+  .s-waiting  { background: #fef3c7; color: #b45309; }
 
   .num { font-variant-numeric: tabular-nums; }
   .pos { color: #16a34a; font-weight: 500; }
   .neg { color: #dc2626; font-weight: 500; }
   .muted { color: #ccc; }
-  .tag {
-    font-size: 10px;
-    color: #888;
-    background: #efefef;
-    border-radius: 4px;
-    padding: 2px 6px;
+  .tag { font-size: 10px; color: #888; background: #efefef; border-radius: 4px; padding: 2px 6px; }
+  .tr { text-align: right; }
+  .bold { font-weight: 600; }
+
+  /* ── earnings tab ── */
+  .earn-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
   }
+  .earn-stat { background: #f5f5f5; border-radius: 8px; padding: 16px; }
+  .earn-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: #999; margin-bottom: 6px; }
+  .earn-stat-value { font-size: 24px; font-weight: 600; letter-spacing: -0.5px; }
+  .earn-stat-sub { font-size: 11px; color: #aaa; margin-top: 4px; }
 
   /* ── footer ── */
   .footer {
-    margin-top: 16px;
-    padding-top: 12px;
+    padding: 12px 24px;
     border-top: 1px solid #f0f0f0;
     font-size: 10px;
     color: #bbb;
@@ -145,67 +147,115 @@
 </head>
 <body>
 
-<div class="stats">
-  <div class="stat">
-    <div class="stat-label">Revenue</div>
-    <div class="stat-value num" id="s-rev">—</div>
+<nav class="nav">
+  <button class="nav-btn active" onclick="showTab('dash')">Dashboard</button>
+  <button class="nav-btn" onclick="showTab('earn')">Gross earnings</button>
+</nav>
+
+<!-- ══════════════ DASHBOARD TAB ══════════════ -->
+<div id="tab-dash" class="tab-panel active">
+
+  <div class="stats">
+    <div class="stat"><div class="stat-label">Revenue</div><div class="stat-value num" id="s-rev">—</div></div>
+    <div class="stat"><div class="stat-label">Total costs</div><div class="stat-value num" id="s-cost">—</div></div>
+    <div class="stat"><div class="stat-label">Profit</div><div class="stat-value num green" id="s-profit">—</div></div>
+    <div class="stat"><div class="stat-label">Margin</div><div class="stat-value num green" id="s-margin">—</div></div>
   </div>
-  <div class="stat">
-    <div class="stat-label">Stock cost</div>
-    <div class="stat-value num" id="s-cost">—</div>
+
+  <div class="charts">
+    <div class="chart-card">
+      <div class="chart-label">Revenue split</div>
+      <div class="chart-wrap donut-wrap"><canvas id="donut"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">By order — realised vs potential</div>
+      <div class="chart-wrap bar-wrap"><canvas id="bar"></canvas></div>
+    </div>
   </div>
-  <div class="stat">
-    <div class="stat-label">Profit</div>
-    <div class="stat-value num green" id="s-profit">—</div>
+
+  <div class="filters">
+    <span>Filter</span>
+    <select id="f-order" onchange="renderDash()">
+      <option value="">All orders</option>
+      <option value="June #1">June #1</option>
+      <option value="June #2">June #2</option>
+      <option value="June #3">June #3</option>
+    </select>
+    <select id="f-status" onchange="renderDash()">
+      <option value="">All statuses</option>
+      <option value="Sold">Sold</option>
+      <option value="Shipped">Shipped</option>
+      <option value="Listed">Listed</option>
+      <option value="Waiting shipment">Waiting shipment</option>
+      <option value="Returned">Returned</option>
+    </select>
   </div>
-  <div class="stat">
-    <div class="stat-label">Margin</div>
-    <div class="stat-value num green" id="s-margin">—</div>
-  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th><th>Order</th><th>Status</th>
+        <th>List price</th><th>Sold price</th><th>Item cost</th><th>Shipping</th><th>Profit</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
 </div>
 
-<div class="charts">
-  <div class="chart-card">
-    <div class="chart-label">Revenue split</div>
-    <div class="chart-wrap donut-wrap"><canvas id="donut"></canvas></div>
-  </div>
-  <div class="chart-card">
-    <div class="chart-label">By order — realised vs potential</div>
-    <div class="chart-wrap bar-wrap"><canvas id="bar"></canvas></div>
-  </div>
-</div>
+<!-- ══════════════ EARNINGS TAB ══════════════ -->
+<div id="tab-earn" class="tab-panel">
 
-<div class="filters">
-  <span>Filter</span>
-  <select id="f-order" onchange="render()">
-    <option value="">All orders</option>
-    <option value="June #1">June #1</option>
-    <option value="June #2">June #2</option>
-    <option value="June #3">June #3</option>
-  </select>
-  <select id="f-status" onchange="render()">
-    <option value="">All statuses</option>
-    <option value="Sold">Sold</option>
-    <option value="Shipped">Shipped</option>
-    <option value="Listed">Listed</option>
-    <option value="Returned">Returned</option>
-  </select>
-</div>
+  <div class="earn-stats">
+    <div class="earn-stat">
+      <div class="earn-stat-label">Gross revenue</div>
+      <div class="earn-stat-value green" id="e-rev">—</div>
+      <div class="earn-stat-sub" id="e-rev-sub">—</div>
+    </div>
+    <div class="earn-stat">
+      <div class="earn-stat-label">Potential revenue</div>
+      <div class="earn-stat-value amber" id="e-pot">—</div>
+      <div class="earn-stat-sub" id="e-pot-sub">—</div>
+    </div>
+    <div class="earn-stat">
+      <div class="earn-stat-label">Items sold</div>
+      <div class="earn-stat-value" id="e-sold">—</div>
+      <div class="earn-stat-sub" id="e-sold-sub">—</div>
+    </div>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Order</th>
-      <th>Status</th>
-      <th>List price</th>
-      <th>Sold price</th>
-      <th>Cost</th>
-      <th>Profit</th>
-    </tr>
-  </thead>
-  <tbody id="tbody"></tbody>
-</table>
+  <div class="filters">
+    <span>Quarter</span>
+    <select id="e-quarter" onchange="renderEarn()">
+      <option value="">All time</option>
+      <option value="2026-Q1">Q1 2026 (Jan–Mar)</option>
+      <option value="2026-Q2">Q2 2026 (Apr–Jun)</option>
+      <option value="2026-Q3">Q3 2026 (Jul–Sep)</option>
+      <option value="2026-Q4">Q4 2026 (Oct–Dec)</option>
+    </select>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:20px">
+    <div class="chart-label">Revenue by order</div>
+    <div class="chart-wrap" style="height:180px"><canvas id="earn-bar"></canvas></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Order</th>
+        <th class="tr">Items</th>
+        <th class="tr">Sold</th>
+        <th class="tr">Unsold</th>
+        <th class="tr">Gross revenue</th>
+        <th class="tr">Item cost</th>
+        <th class="tr">Shipping</th>
+        <th class="tr">Net profit</th>
+        <th class="tr">Potential left</th>
+      </tr>
+    </thead>
+    <tbody id="earn-tbody"></tbody>
+  </table>
+</div>
 
 <div class="footer">
   <span>Data as of 11 Jun 2026 — ask Claude to refresh when you've added new sales</span>
@@ -213,74 +263,89 @@
 </div>
 
 <script>
-// ── Data (fetched 11 Jun 2026 from Notion) ─────────────────
+// ── Data (fetched 11 Jun 2026 from Notion) ──────────────────
+// shipping = order shipping cost ÷ number of items in that order
+// June #1: £51.39 ÷ 3 items = £17.13 per item
+// June #2: shipping not yet set (order In Basket)
+// June #3: shipping not yet set
 const SALES = [
   // June #1
-  { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped",          list:30,       sold:30,       cost:7.69  },
-  { name:"UA compression shirt black",     order:"June #1",   status:"Shipped",          list:15,       sold:15,       cost:3.60  },
-  { name:"UA compression shirt white",     order:"June #1",   status:"Shipped",          list:15,       sold:10,       cost:3.60  },
+  { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped",          list:30,    sold:30,   cost:7.69,  shipping:17.13, dateSold:"2026-06-01" },
+  { name:"UA compression shirt black",     order:"June #1",   status:"Shipped",          list:15,    sold:15,   cost:3.60,  shipping:17.13, dateSold:"2026-06-01" },
+  { name:"UA compression shirt white",     order:"June #1",   status:"Shipped",          list:15,    sold:10,   cost:3.60,  shipping:17.13, dateSold:"2026-06-01" },
 
   // June #2
-  { name:"Stanley Cup Pink",               order:"June #2",   status:"Waiting shipment", list:24.99,    sold:null,     cost:2.87  },
-  { name:"Stanley Cup Light Purple",       order:"June #2",   status:"Waiting shipment", list:24.99,    sold:null,     cost:2.87  },
-  { name:"Stanley Cup Dune",               order:"June #2",   status:"Waiting shipment", list:24.99,    sold:null,     cost:2.87  },
-  { name:"Nike miler short set Black #1",  order:"June #2",   status:"Waiting shipment", list:34.99,    sold:null,     cost:7.69  },
-  { name:"Nike miler short set Green",     order:"June #2",   status:"Waiting shipment", list:34.99,    sold:null,     cost:7.69  },
-  { name:"Nike miler short set Black #2",  order:"June #2",   status:"Waiting shipment", list:34.99,    sold:null,     cost:7.69  },
-  { name:"UA compression shirt black #1",  order:"June #2",   status:"Waiting shipment", list:19.99,    sold:null,     cost:3.60  },
-  { name:"UA compression shirt black #2",  order:"June #2",   status:"Waiting shipment", list:19.99,    sold:null,     cost:3.60  },
-  { name:"Essential shorts black #1",      order:"June #2",   status:"Waiting shipment", list:29.99,    sold:null,     cost:12.75 },
-  { name:"Essential shorts black #2",      order:"June #2",   status:"Waiting shipment", list:29.99,    sold:null,     cost:12.75 },
-  { name:"Bape Polo black",                order:"June #2",   status:"Waiting shipment", list:34.99,    sold:null,     cost:12.58 },
-  { name:"Bape Polo white",                order:"June #2",   status:"Waiting shipment", list:34.99,    sold:null,     cost:12.58 },
-  { name:"UA compression shirt black #3",  order:"June #2",   status:"Waiting shipment", list:19.99,    sold:null,     cost:3.60  },
-  { name:"UA compression shirt black #4",  order:"June #2",   status:"Waiting shipment", list:19.99,    sold:null,     cost:3.60  },
-  { name:"True Religion Supreme Polo",     order:"June #2",   status:"Waiting shipment", list:74.99,    sold:null,     cost:19.26 },
+  { name:"Stanley Cup Pink",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,     dateSold:null },
+  { name:"Stanley Cup Light Purple",       order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,     dateSold:null },
+  { name:"Stanley Cup Dune",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,     dateSold:null },
+  { name:"Nike miler short set Black #1",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,     dateSold:null },
+  { name:"Nike miler short set Green",     order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,     dateSold:null },
+  { name:"Nike miler short set Black #2",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,     dateSold:null },
+  { name:"UA compression shirt black #1",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,     dateSold:null },
+  { name:"UA compression shirt black #2",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,     dateSold:null },
+  { name:"Essential shorts black #1",      order:"June #2",   status:"Waiting shipment", list:29.99, sold:null, cost:12.75, shipping:0,     dateSold:null },
+  { name:"Essential shorts black #2",      order:"June #2",   status:"Waiting shipment", list:29.99, sold:null, cost:12.75, shipping:0,     dateSold:null },
+  { name:"Bape Polo black",                order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:12.58, shipping:0,     dateSold:null },
+  { name:"Bape Polo white",                order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:12.58, shipping:0,     dateSold:null },
+  { name:"UA compression shirt black #3",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,     dateSold:null },
+  { name:"UA compression shirt black #4",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,     dateSold:null },
+  { name:"True Religion Supreme Polo",     order:"June #2",   status:"Waiting shipment", list:74.99, sold:null, cost:19.26, shipping:0,     dateSold:null },
 ];
 
-// ── Helpers ───────────────────────────────────────────────
+const ALL_ORDERS = [...new Set(SALES.map(r => r.order))];
+
+// ── Helpers ────────────────────────────────────────────────
 const f  = n => n != null ? '£' + parseFloat(n).toFixed(2) : '<span class="muted">—</span>';
 const fc = n => {
   if (n == null) return '<span class="muted">—</span>';
   const v = parseFloat(n);
-  return `<span class="${v >= 0 ? 'pos' : 'neg'}">${v >= 0 ? '+' : ''}£${v.toFixed(2)}</span>`;
+  return `<span class="${v >= 0 ? 'pos' : 'neg'}">${v >= 0 ? '+' : ''}£${Math.abs(v).toFixed(2)}</span>`;
 };
-const bc = s => ({ Sold:'s-sold', Shipped:'s-shipped', Listed:'s-listed', Returned:'s-returned' }[s] || 's-listed');
+const bc = s => ({ Sold:'s-sold', Shipped:'s-shipped', Listed:'s-listed', Returned:'s-returned', 'Waiting shipment':'s-waiting' }[s] || 's-listed');
 
-let donutChart = null, barChart = null;
+let donutChart = null, barChart = null, earnChart = null;
 
-// ── Render ────────────────────────────────────────────────
-function render() {
+// ── Tabs ───────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelectorAll('.nav-btn')[name === 'dash' ? 0 : 1].classList.add('active');
+  if (name === 'earn') renderEarn();
+}
+
+// ── Dashboard ──────────────────────────────────────────────
+function renderDash() {
   const fOrder  = document.getElementById('f-order').value;
   const fStatus = document.getElementById('f-status').value;
-
   let rows = SALES;
   if (fOrder)  rows = rows.filter(r => r.order  === fOrder);
   if (fStatus) rows = rows.filter(r => r.status === fStatus);
 
   const realised = rows.filter(r => r.sold != null);
-  const revenue  = realised.reduce((s,r) => s + r.sold, 0);
-  const cost     = realised.reduce((s,r) => s + r.cost, 0);
-  const profit   = revenue - cost;
+  const revenue  = realised.reduce((s, r) => s + r.sold, 0);
+  const itemCost = realised.reduce((s, r) => s + r.cost, 0);
+  const shipping = realised.reduce((s, r) => s + r.shipping, 0);
+  const total    = itemCost + shipping;
+  const profit   = revenue - total;
   const margin   = revenue > 0 ? (profit / revenue) * 100 : 0;
 
-  // Stats
   document.getElementById('s-rev').textContent    = '£' + revenue.toFixed(2);
-  document.getElementById('s-cost').textContent   = '£' + cost.toFixed(2);
-  document.getElementById('s-profit').textContent = (profit >= 0 ? '+' : '') + '£' + profit.toFixed(2);
+  document.getElementById('s-cost').textContent   = '£' + total.toFixed(2);
+  document.getElementById('s-profit').textContent = (profit >= 0 ? '+' : '') + '£' + Math.abs(profit).toFixed(2);
   document.getElementById('s-margin').textContent = margin.toFixed(1) + '%';
-  document.getElementById('s-profit').className = 'stat-value num ' + (profit >= 0 ? 'green' : 'amber');
-  document.getElementById('s-margin').className = 'stat-value num ' + (margin >= 0 ? 'green' : 'amber');
+  document.getElementById('s-profit').className   = 'stat-value num ' + (profit >= 0 ? 'green' : 'red');
+  document.getElementById('s-margin').className   = 'stat-value num ' + (margin  >= 0 ? 'green' : 'red');
 
-  // Donut
+  // Donut — 3 segments
   if (donutChart) donutChart.destroy();
   donutChart = new Chart(document.getElementById('donut'), {
     type: 'doughnut',
     data: {
-      labels: ['Profit', 'Stock cost'],
+      labels: ['Profit', 'Item cost', 'Shipping'],
       datasets: [{
-        data: [Math.max(0, profit), cost],
-        backgroundColor: ['#16a34a', '#1e40af'],
+        data: [Math.max(0, profit), itemCost, shipping],
+        backgroundColor: ['#16a34a', '#1e40af', '#9333ea'],
         borderWidth: 0,
         hoverOffset: 4
       }]
@@ -288,21 +353,16 @@ function render() {
     options: {
       cutout: '70%',
       plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { padding: 12, font: { size: 11 }, boxWidth: 10 }
-        },
-        tooltip: {
-          callbacks: { label: c => ` ${c.label}: £${parseFloat(c.raw).toFixed(2)}` }
-        }
+        legend: { position: 'bottom', labels: { padding: 10, font: { size: 11 }, boxWidth: 10 } },
+        tooltip: { callbacks: { label: c => ` ${c.label}: £${parseFloat(c.raw).toFixed(2)}` } }
       }
     }
   });
 
-  // Bar — use all SALES for full picture
-  const orders = ['June #1', 'June #2', 'June #3'];
-  const realisedRev  = orders.map(o => SALES.filter(r => r.order===o && r.sold!=null).reduce((s,r)=>s+r.sold,0));
-  const potentialRev = orders.map(o => SALES.filter(r => r.order===o && r.sold==null).reduce((s,r)=>s+r.list,0));
+  // Bar — respects filter
+  const orders = [...new Set(rows.map(r => r.order))];
+  const realisedRev  = orders.map(o => rows.filter(r => r.order===o && r.sold!=null).reduce((s,r)=>s+r.sold,0));
+  const potentialRev = orders.map(o => rows.filter(r => r.order===o && r.sold==null).reduce((s,r)=>s+r.list,0));
 
   if (barChart) barChart.destroy();
   barChart = new Chart(document.getElementById('bar'), {
@@ -310,35 +370,18 @@ function render() {
     data: {
       labels: orders,
       datasets: [
-        {
-          label: 'Realised',
-          data: realisedRev,
-          backgroundColor: '#16a34a',
-          borderRadius: 4,
-          stack: 'a'
-        },
-        {
-          label: 'Listed (potential)',
-          data: potentialRev,
-          backgroundColor: '#e5e7eb',
-          borderRadius: 4,
-          stack: 'a'
-        }
+        { label: 'Realised',           data: realisedRev,  backgroundColor: '#16a34a', borderRadius: 4, stack: 'a' },
+        { label: 'Listed (potential)', data: potentialRev, backgroundColor: '#e5e7eb', borderRadius: 4, stack: 'a' }
       ]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 12, boxWidth: 10 } },
         tooltip: { callbacks: { label: c => ` ${c.dataset.label}: £${parseFloat(c.raw).toFixed(2)}` } }
       },
       scales: {
-        y: {
-          stacked: true,
-          ticks: { callback: v => '£' + v, font: { size: 11 } },
-          grid: { color: '#f0f0f0' }
-        },
+        y: { stacked: true, ticks: { callback: v => '£' + v, font: { size: 11 } }, grid: { color: '#f0f0f0' } },
         x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 } } }
       }
     }
@@ -347,11 +390,11 @@ function render() {
   // Table
   const tbody = document.getElementById('tbody');
   if (!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#ccc;padding:20px">No items</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#ccc;padding:20px">No items</td></tr>';
     return;
   }
   tbody.innerHTML = rows.map(r => {
-    const profit = r.sold != null ? r.sold - r.cost : null;
+    const profit = r.sold != null ? r.sold - r.cost - r.shipping : null;
     return `<tr>
       <td>${r.name}</td>
       <td><span class="tag">${r.order}</span></td>
@@ -359,12 +402,87 @@ function render() {
       <td class="num">${f(r.list)}</td>
       <td class="num">${f(r.sold)}</td>
       <td class="num">${r.cost > 0 ? f(r.cost) : '<span class="muted">—</span>'}</td>
+      <td class="num">${r.shipping > 0 ? f(r.shipping) : '<span class="muted">—</span>'}</td>
       <td class="num">${fc(profit)}</td>
     </tr>`;
   }).join('');
 }
 
-render();
+// ── Gross Earnings ─────────────────────────────────────────
+function renderEarn() {
+  const q = document.getElementById('e-quarter').value;
+  let data = SALES;
+  if (q) {
+    const [yr, qt] = q.split('-');
+    const R = { Q1:['01-01','03-31'], Q2:['04-01','06-30'], Q3:['07-01','09-30'], Q4:['10-01','12-31'] };
+    const [from, to] = R[qt].map(d => `${yr}-${d}`);
+    data = data.filter(r => r.dateSold && r.dateSold >= from && r.dateSold <= to);
+  }
+
+  const soldItems   = data.filter(r => r.sold != null);
+  const unsoldItems = SALES.filter(r => r.sold == null);
+  const rev  = soldItems.reduce((s, r) => s + r.sold, 0);
+  const pot  = unsoldItems.reduce((s, r) => s + r.list, 0);
+  const sold = soldItems.length;
+
+  document.getElementById('e-rev').textContent     = '£' + rev.toFixed(2);
+  document.getElementById('e-rev-sub').textContent = sold + ' item' + (sold === 1 ? '' : 's') + ' sold';
+  document.getElementById('e-pot').textContent     = '£' + pot.toFixed(2);
+  document.getElementById('e-pot-sub').textContent = unsoldItems.length + ' items still listed';
+  document.getElementById('e-sold').textContent    = sold + ' / ' + SALES.length;
+  document.getElementById('e-sold-sub').textContent = Math.round((sold / SALES.length) * 100) + '% sell-through rate';
+
+  if (earnChart) earnChart.destroy();
+  const earnRevs  = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.sold,0));
+  const earnPots  = ALL_ORDERS.map(o => SALES.filter(r => r.order===o&&r.sold==null).reduce((s,r)=>s+r.list,0));
+  const earnCosts = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.cost+r.shipping,0));
+  earnChart = new Chart(document.getElementById('earn-bar'), {
+    type: 'bar',
+    data: {
+      labels: ALL_ORDERS,
+      datasets: [
+        { label: 'Revenue',            data: earnRevs,  backgroundColor: '#16a34a', borderRadius: 4 },
+        { label: 'Potential',          data: earnPots,  backgroundColor: '#e5e7eb', borderRadius: 4 },
+        { label: 'Total costs',        data: earnCosts, backgroundColor: '#9333ea', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, padding: 12, boxWidth: 10 } },
+        tooltip: { callbacks: { label: c => ` ${c.dataset.label}: £${parseFloat(c.raw).toFixed(2)}` } }
+      },
+      scales: {
+        y: { ticks: { callback: v => '£' + v, font: { size: 11 } }, grid: { color: '#f0f0f0' } },
+        x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+
+  document.getElementById('earn-tbody').innerHTML = ALL_ORDERS.map(o => {
+    const items  = SALES.filter(r => r.order === o);
+    const sold   = data.filter(r => r.order === o && r.sold != null);
+    const unsold = items.filter(r => r.sold == null);
+    const rev    = sold.reduce((s,r) => s + r.sold, 0);
+    const ic     = sold.reduce((s,r) => s + r.cost, 0);
+    const sh     = sold.reduce((s,r) => s + r.shipping, 0);
+    const prf    = rev - ic - sh;
+    const pot    = unsold.reduce((s,r) => s + r.list, 0);
+    return `<tr>
+      <td class="bold">${o}</td>
+      <td class="tr">${items.length}</td>
+      <td class="tr">${sold.length}</td>
+      <td class="tr">${unsold.length}</td>
+      <td class="tr bold">${f(rev)}</td>
+      <td class="tr">${ic > 0 ? f(ic) : '<span class="muted">—</span>'}</td>
+      <td class="tr">${sh > 0 ? f(sh) : '<span class="muted">—</span>'}</td>
+      <td class="tr">${fc(prf)}</td>
+      <td class="tr amber">£${pot.toFixed(2)}</td>
+    </tr>`;
+  }).join('');
+}
+
+renderDash();
 </script>
 </body>
 </html>
