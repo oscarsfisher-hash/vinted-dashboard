@@ -266,33 +266,35 @@
 // ── Data (fetched 14 Jun 2026 from Notion) ──────────────────
 // shipping = order shipping cost ÷ number of items in that order
 // June #1: £15.43 ÷ 3 items = £5.14 per item
-// June #2: shipping not yet set (order In Basket)
-// June #3: no sales yet, no shipping set
+// June #2: no shipping cost set yet (status: In Basket)
+// June #3: no sales yet, no shipping set (status: In Basket)
 const SALES = [
-  // June #1
+  // June #1 — Received, shipping £15.43, 3 items = £5.14/item
   { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped",          list:30,    sold:30,   cost:7.69,  shipping:5.14, dateSold:"2026-06-01" },
   { name:"UA compression shirt black",     order:"June #1",   status:"Shipped",          list:15,    sold:15,   cost:3.60,  shipping:5.14, dateSold:"2026-06-01" },
   { name:"UA compression shirt white",     order:"June #1",   status:"Shipped",          list:15,    sold:10,   cost:3.60,  shipping:5.14, dateSold:"2026-06-07" },
 
-  // June #2
-  { name:"Stanley Cup Pink",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,     dateSold:null },
-  { name:"Stanley Cup Light Purple",       order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,     dateSold:null },
-  { name:"Stanley Cup Dune",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,     dateSold:null },
-  { name:"Nike miler short set Black #1",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,     dateSold:null },
-  { name:"Nike miler short set Green",     order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,     dateSold:null },
-  { name:"Nike miler short set Black #2",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,     dateSold:null },
-  { name:"UA compression shirt black #1",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,     dateSold:null },
-  { name:"UA compression shirt black #2",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,     dateSold:null },
-  { name:"Essential shorts black #1",      order:"June #2",   status:"Waiting shipment", list:29.99, sold:null, cost:12.75, shipping:0,     dateSold:null },
-  { name:"Essential shorts black #2",      order:"June #2",   status:"Waiting shipment", list:29.99, sold:null, cost:12.75, shipping:0,     dateSold:null },
-  { name:"Bape Polo black",                order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:12.58, shipping:0,     dateSold:null },
-  { name:"Bape Polo white",                order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:12.58, shipping:0,     dateSold:null },
-  { name:"UA compression shirt black #3",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,     dateSold:null },
-  { name:"UA compression shirt black #4",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,     dateSold:null },
-  { name:"True Religion Supreme Polo",     order:"June #2",   status:"Waiting shipment", list:74.99, sold:null, cost:19.26, shipping:0,     dateSold:null },
+  // June #2 — In Basket, no shipping yet
+  { name:"Stanley Cup Pink",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
+  { name:"Stanley Cup Light Purple",       order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
+  { name:"Stanley Cup Dune",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
+  { name:"Nike miler short set Black #1",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"Nike miler short set Green",     order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"Nike miler short set Black #2",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"UA compression shirt black #1",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
+  { name:"UA compression shirt black #2",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
+  { name:"Essential shorts black #1",      order:"June #2",   status:"Waiting shipment", list:29.99, sold:null, cost:12.75, shipping:0,    dateSold:null },
+  { name:"Essential shorts black #2",      order:"June #2",   status:"Waiting shipment", list:29.99, sold:null, cost:12.75, shipping:0,    dateSold:null },
+  { name:"Bape Polo black",                order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:12.58, shipping:0,    dateSold:null },
+  { name:"Bape Polo white",                order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:12.58, shipping:0,    dateSold:null },
+  { name:"UA compression shirt black #3",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
+  { name:"UA compression shirt black #4",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
+  { name:"True Religion Supreme Polo",     order:"June #2",   status:"Waiting shipment", list:74.99, sold:null, cost:19.26, shipping:0,    dateSold:null },
+
+  // June #3 — no sales items yet
 ];
 
-const ALL_ORDERS = [...new Set(SALES.map(r => r.order))];
+const ALL_ORDERS = ["June #1", "June #2", "June #3"];
 
 // ── Helpers ────────────────────────────────────────────────
 const f  = n => n != null ? '£' + parseFloat(n).toFixed(2) : '<span class="muted">—</span>';
