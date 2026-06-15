@@ -258,16 +258,16 @@
 </div>
 
 <div class="footer">
-  <span>Data as of 14 Jun 2026 — ask Claude to refresh when you've added new sales</span>
+  <span>Data as of 15 Jun 2026 — ask Claude to refresh when you've added new sales</span>
   <span>Vinted Reselling</span>
 </div>
 
 <script>
-// ── Data (fetched 14 Jun 2026 from Notion) ──────────────────
+// ── Data (fetched 15 Jun 2026 from Notion) ──────────────────
 // shipping = order shipping cost ÷ number of items in that order
 // June #1: £15.43 ÷ 3 items = £5.14 per item
 // June #2: no shipping cost set yet (status: In Basket)
-// June #3: no sales yet, no shipping set (status: In Basket)
+// June #3: no sales yet, no shipping set
 const SALES = [
   // June #1 — Received, shipping £15.43, 3 items = £5.14/item
   { name:"Nike Miler Set",                 order:"June #1",   status:"Shipped",          list:30,    sold:30,   cost:7.69,  shipping:5.14, dateSold:"2026-06-01" },
@@ -291,6 +291,7 @@ const SALES = [
   { name:"UA compression shirt black #4",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
   { name:"Nike miler short set Black #3",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
   { name:"Nike miler short set Green #2",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"True Religion Supreme Polo",     order:"June #2",   status:"Waiting shipment", list:74.99, sold:null, cost:19.26, shipping:0,    dateSold:null },
 
   // June #3 — no sales items yet
 ];
@@ -364,7 +365,9 @@ function renderDash() {
 
   // Bar — respects filter
   const orders = [...new Set(rows.map(r => r.order))];
-  const realisedRev  = orders.map(o => rows.filter(r => r.order===o && r.sold!=null).reduce((s,r)=>s+r.sold,0));
+  const barProfit   = orders.map(o => { const s = rows.filter(r=>r.order===o&&r.sold!=null); return Math.max(0, s.reduce((a,r)=>a+r.sold,0) - s.reduce((a,r)=>a+r.cost,0) - s.reduce((a,r)=>a+r.shipping,0)); });
+  const barItemCost = orders.map(o => rows.filter(r=>r.order===o&&r.sold!=null).reduce((a,r)=>a+r.cost,0));
+  const barShipping = orders.map(o => rows.filter(r=>r.order===o&&r.sold!=null).reduce((a,r)=>a+r.shipping,0));
   const potentialRev = orders.map(o => rows.filter(r => r.order===o && r.sold==null).reduce((s,r)=>s+r.list,0));
 
   if (barChart) barChart.destroy();
@@ -373,8 +376,10 @@ function renderDash() {
     data: {
       labels: orders,
       datasets: [
-        { label: 'Realised',           data: realisedRev,  backgroundColor: '#16a34a', borderRadius: 4, stack: 'a' },
-        { label: 'Listed (potential)', data: potentialRev, backgroundColor: '#e5e7eb', borderRadius: 4, stack: 'a' }
+        { label: 'Profit',             data: barProfit,   backgroundColor: '#16a34a', borderRadius: 4, stack: 'a' },
+        { label: 'Item cost',          data: barItemCost, backgroundColor: '#1e40af', borderRadius: 0, stack: 'a' },
+        { label: 'Shipping',           data: barShipping, backgroundColor: '#9333ea', borderRadius: 0, stack: 'a' },
+        { label: 'Listed (potential)', data: potentialRev,backgroundColor: '#e5e7eb', borderRadius: 4, stack: 'a' }
       ]
     },
     options: {
@@ -438,15 +443,17 @@ function renderEarn() {
   if (earnChart) earnChart.destroy();
   const earnRevs  = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.sold,0));
   const earnPots  = ALL_ORDERS.map(o => SALES.filter(r => r.order===o&&r.sold==null).reduce((s,r)=>s+r.list,0));
-  const earnCosts = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.cost+r.shipping,0));
+  const earnItemCosts = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.cost,0));
+  const earnShipping  = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.shipping,0));
   earnChart = new Chart(document.getElementById('earn-bar'), {
     type: 'bar',
     data: {
       labels: ALL_ORDERS,
       datasets: [
-        { label: 'Revenue',            data: earnRevs,  backgroundColor: '#16a34a', borderRadius: 4 },
-        { label: 'Potential',          data: earnPots,  backgroundColor: '#e5e7eb', borderRadius: 4 },
-        { label: 'Total costs',        data: earnCosts, backgroundColor: '#9333ea', borderRadius: 4 }
+        { label: 'Revenue',    data: earnRevs,      backgroundColor: '#16a34a', borderRadius: 4 },
+        { label: 'Potential',  data: earnPots,       backgroundColor: '#e5e7eb', borderRadius: 4 },
+        { label: 'Item cost',  data: earnItemCosts,  backgroundColor: '#1e40af', borderRadius: 4 },
+        { label: 'Shipping',   data: earnShipping,   backgroundColor: '#9333ea', borderRadius: 4 }
       ]
     },
     options: {
