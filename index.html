@@ -113,6 +113,7 @@
   .s-listed   { background: #f1f5f9; color: #64748b; }
   .s-returned { background: #fee2e2; color: #b91c1c; }
   .s-waiting  { background: #fef3c7; color: #b45309; }
+  .s-ordered  { background: #ede9fe; color: #6d28d9; }
 
   .num { font-variant-numeric: tabular-nums; }
   .pos { color: #16a34a; font-weight: 500; }
@@ -186,6 +187,7 @@
       <option value="Sold">Sold</option>
       <option value="Shipped">Shipped</option>
       <option value="Listed">Listed</option>
+      <option value="Ordered">Ordered</option>
       <option value="Waiting shipment">Waiting shipment</option>
       <option value="Returned">Returned</option>
     </select>
@@ -275,22 +277,22 @@ const SALES = [
   { name:"UA compression shirt white",     order:"June #1",   status:"Shipped",          list:15,    sold:10,   cost:3.60,  shipping:5.14, dateSold:"2026-06-07" },
 
   // June #2 — In Basket, no shipping yet
-  { name:"Stanley Cup Pink",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
-  { name:"Stanley Cup Light Purple",       order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
-  { name:"Stanley Cup Dune",               order:"June #2",   status:"Waiting shipment", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
-  { name:"Nike miler short set Black #1",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
-  { name:"Nike miler short set Green #1",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
-  { name:"Nike miler short set Black #2",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
-  { name:"UA compression shirt black #1",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
-  { name:"UA compression shirt black #2",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
-  { name:"Essential shorts black #1",      order:"June #2",   status:"Waiting shipment", list:29.99, sold:null, cost:12.75, shipping:0,    dateSold:null },
-  { name:"Essential shorts black #2",      order:"June #2",   status:"Waiting shipment", list:29.99, sold:null, cost:12.75, shipping:0,    dateSold:null },
-  { name:"Bape Polo black",                order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:12.58, shipping:0,    dateSold:null },
-  { name:"Bape Polo white",                order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:12.58, shipping:0,    dateSold:null },
-  { name:"UA compression shirt black #3",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
-  { name:"UA compression shirt black #4",  order:"June #2",   status:"Waiting shipment", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
-  { name:"Nike miler short set Black #3",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
-  { name:"Nike miler short set Green #2",  order:"June #2",   status:"Waiting shipment", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"Stanley Cup Pink",               order:"June #2",   status:"Ordered", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
+  { name:"Stanley Cup Light Purple",       order:"June #2",   status:"Ordered", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
+  { name:"Stanley Cup Dune",               order:"June #2",   status:"Ordered", list:24.99, sold:null, cost:2.87,  shipping:0,    dateSold:null },
+  { name:"Nike miler short set Black #1",  order:"June #2",   status:"Ordered", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"Nike miler short set Green #1",  order:"June #2",   status:"Ordered", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"Nike miler short set Black #2",  order:"June #2",   status:"Ordered", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"UA compression shirt black #1",  order:"June #2",   status:"Ordered", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
+  { name:"UA compression shirt black #2",  order:"June #2",   status:"Ordered", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
+  { name:"Essential shorts black #1",      order:"June #2",   status:"Ordered", list:29.99, sold:null, cost:12.75, shipping:0,    dateSold:null },
+  { name:"Essential shorts black #2",      order:"June #2",   status:"Ordered", list:29.99, sold:null, cost:12.75, shipping:0,    dateSold:null },
+  { name:"Bape Polo black",                order:"June #2",   status:"Ordered", list:34.99, sold:null, cost:12.58, shipping:0,    dateSold:null },
+  { name:"Bape Polo white",                order:"June #2",   status:"Ordered", list:34.99, sold:null, cost:12.58, shipping:0,    dateSold:null },
+  { name:"UA compression shirt black #3",  order:"June #2",   status:"Ordered", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
+  { name:"UA compression shirt black #4",  order:"June #2",   status:"Ordered", list:19.99, sold:null, cost:3.60,  shipping:0,    dateSold:null },
+  { name:"Nike miler short set Black #3",  order:"June #2",   status:"Ordered", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
+  { name:"Nike miler short set Green #2",  order:"June #2",   status:"Ordered", list:34.99, sold:null, cost:7.69,  shipping:0,    dateSold:null },
 
   // June #3 — no sales items yet
 ];
@@ -304,7 +306,12 @@ const fc = n => {
   const v = parseFloat(n);
   return `<span class="${v >= 0 ? 'pos' : 'neg'}">${v >= 0 ? '+' : ''}£${Math.abs(v).toFixed(2)}</span>`;
 };
-const bc = s => ({ Sold:'s-sold', Shipped:'s-shipped', Listed:'s-listed', Returned:'s-returned', 'Waiting shipment':'s-waiting' }[s] || 's-listed');
+const bc = s => ({ Sold:'s-sold', Shipped:'s-shipped', Listed:'s-listed', Returned:'s-returned', 'Waiting shipment':'s-waiting', Ordered:'s-ordered' }[s] || 's-listed');
+
+// Statuses where item costs are committed (purchased)
+const COST_COMMITTED = new Set(['Ordered', 'Waiting shipment', 'Shipped', 'Sold']);
+// Statuses where shipping is also committed
+const SHIP_COMMITTED = new Set(['Shipped', 'Sold']);
 
 let donutChart = null, barChart = null, earnChart = null;
 
@@ -364,10 +371,23 @@ function renderDash() {
 
   // Bar — respects filter
   const orders = [...new Set(rows.map(r => r.order))];
-  const barProfit   = orders.map(o => { const s = rows.filter(r=>r.order===o&&r.sold!=null); return Math.max(0, s.reduce((a,r)=>a+r.sold,0) - s.reduce((a,r)=>a+r.cost,0) - s.reduce((a,r)=>a+r.shipping,0)); });
-  const barItemCost = orders.map(o => rows.filter(r=>r.order===o&&r.sold!=null).reduce((a,r)=>a+r.cost,0));
-  const barShipping = orders.map(o => rows.filter(r=>r.order===o&&r.sold!=null).reduce((a,r)=>a+r.shipping,0));
-  const potentialRev = orders.map(o => rows.filter(r => r.order===o && r.sold==null).reduce((s,r)=>s+r.list,0));
+  // Profit: sold items only (revenue minus committed costs)
+  const barProfit   = orders.map(o => {
+    const s = rows.filter(r => r.order===o && r.sold!=null);
+    return Math.max(0, s.reduce((a,r) => a + r.sold - r.cost - r.shipping, 0));
+  });
+  // Item cost: all items where costs are committed (Ordered / Waiting shipment / Shipped / Sold)
+  const barItemCost = orders.map(o =>
+    rows.filter(r => r.order===o && COST_COMMITTED.has(r.status)).reduce((a,r) => a + r.cost, 0)
+  );
+  // Shipping: only once items are shipped/sold
+  const barShipping = orders.map(o =>
+    rows.filter(r => r.order===o && SHIP_COMMITTED.has(r.status)).reduce((a,r) => a + r.shipping, 0)
+  );
+  // Potential: list price of items not yet ordered (costs not committed)
+  const potentialRev = orders.map(o =>
+    rows.filter(r => r.order===o && r.sold==null && !COST_COMMITTED.has(r.status)).reduce((a,r) => a + r.list, 0)
+  );
 
   if (barChart) barChart.destroy();
   barChart = new Chart(document.getElementById('bar'), {
@@ -440,10 +460,10 @@ function renderEarn() {
   document.getElementById('e-sold-sub').textContent = Math.round((sold / SALES.length) * 100) + '% sell-through rate';
 
   if (earnChart) earnChart.destroy();
-  const earnRevs  = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.sold,0));
-  const earnPots  = ALL_ORDERS.map(o => SALES.filter(r => r.order===o&&r.sold==null).reduce((s,r)=>s+r.list,0));
-  const earnItemCosts = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.cost,0));
-  const earnShipping  = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.shipping,0));
+  const earnRevs      = ALL_ORDERS.map(o => data.filter(r => r.order===o&&r.sold!=null).reduce((s,r)=>s+r.sold,0));
+  const earnPots      = ALL_ORDERS.map(o => SALES.filter(r => r.order===o&&r.sold==null&&!COST_COMMITTED.has(r.status)).reduce((s,r)=>s+r.list,0));
+  const earnItemCosts = ALL_ORDERS.map(o => SALES.filter(r => r.order===o&&COST_COMMITTED.has(r.status)).reduce((s,r)=>s+r.cost,0));
+  const earnShipping  = ALL_ORDERS.map(o => SALES.filter(r => r.order===o&&SHIP_COMMITTED.has(r.status)).reduce((s,r)=>s+r.shipping,0));
   earnChart = new Chart(document.getElementById('earn-bar'), {
     type: 'bar',
     data: {
@@ -473,8 +493,8 @@ function renderEarn() {
     const sold   = data.filter(r => r.order === o && r.sold != null);
     const unsold = items.filter(r => r.sold == null);
     const rev    = sold.reduce((s,r) => s + r.sold, 0);
-    const ic     = sold.reduce((s,r) => s + r.cost, 0);
-    const sh     = sold.reduce((s,r) => s + r.shipping, 0);
+    const ic     = items.filter(r => COST_COMMITTED.has(r.status)).reduce((s,r) => s + r.cost, 0);
+    const sh     = items.filter(r => SHIP_COMMITTED.has(r.status)).reduce((s,r) => s + r.shipping, 0);
     const prf    = rev - ic - sh;
     const pot    = unsold.reduce((s,r) => s + r.list, 0);
     return `<tr>
