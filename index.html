@@ -197,7 +197,7 @@
     <thead>
       <tr>
         <th>Item</th><th>Order</th><th>Status</th>
-        <th>List price</th><th>Sold price</th><th>Item cost</th><th>Shipping</th><th>Profit</th>
+        <th>List price</th><th>Sold price</th><th>Item cost</th><th>Shipping</th><th>Profit</th><th>Margin</th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -419,11 +419,22 @@ function renderDash() {
   // Table
   const tbody = document.getElementById('tbody');
   if (!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#ccc;padding:20px">No items</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#ccc;padding:20px">No items</td></tr>';
     return;
   }
   tbody.innerHTML = rows.map(r => {
     const profit = r.sold != null ? r.sold - r.cost - r.shipping : null;
+    // Margin: actual for sold items; projected (vs list price) for unsold with known shipping
+    let marginCell;
+    if (r.sold != null && r.sold > 0) {
+      const m = ((r.sold - r.cost - r.shipping) / r.sold) * 100;
+      marginCell = `<span class="${m >= 0 ? 'pos' : 'neg'}">${m.toFixed(1)}%</span>`;
+    } else if (r.sold == null && r.shipping > 0 && r.list > 0) {
+      const m = ((r.list - r.cost - r.shipping) / r.list) * 100;
+      marginCell = `<span style="color:#d97706">${m.toFixed(1)}% est</span>`;
+    } else {
+      marginCell = '<span class="muted">—</span>';
+    }
     return `<tr>
       <td>${r.name}</td>
       <td><span class="tag">${r.order}</span></td>
@@ -433,6 +444,7 @@ function renderDash() {
       <td class="num">${r.cost > 0 ? f(r.cost) : '<span class="muted">—</span>'}</td>
       <td class="num">${r.shipping > 0 ? f(r.shipping) : '<span class="muted">—</span>'}</td>
       <td class="num">${fc(profit)}</td>
+      <td class="num">${marginCell}</td>
     </tr>`;
   }).join('');
 }
