@@ -188,6 +188,7 @@
       <option value="Shipped">Shipped</option>
       <option value="Listed">Listed</option>
       <option value="Ordered">Ordered</option>
+      <option value="Stock">Stock</option>
       <option value="Waiting shipment">Waiting shipment</option>
       <option value="Returned">Returned</option>
     </select>
@@ -260,12 +261,12 @@
 </div>
 
 <div class="footer">
-  <span>Data as of 13 Jul 2026 — ask Claude to refresh when you've added new sales</span>
+  <span>Data as of 17 Jul 2026 — ask Claude to refresh when you've added new sales</span>
   <span>Vinted Reselling</span>
 </div>
 
 <script>
-// ── Data (fetched 13 Jul 2026 from Notion) ─────────────────
+// ── Data (fetched 17 Jul 2026 from Notion) ─────────────────
 // cost = Sugargoo order amount ÷ qty (includes item price, domestic shipping, discounts)
 // shipping = item's weight share of order fees (warehouse fees + intl shipping)
 //   June #1:  fees £15.43 over 980g  → £0.01574/g  (Nike 310g→£4.88, UA 180g→£2.83)
@@ -278,20 +279,20 @@ const SALES = [
   { name:"UA compression shirt black",     order:"June #1",   status:"Shipped",          list:15,    sold:15,   cost:3.60,   shipping:2.83, dateSold:"2026-06-01" },
   { name:"UA compression shirt white",     order:"June #1",   status:"Shipped",          list:15,    sold:10,   cost:3.60,   shipping:2.83, dateSold:"2026-06-07" },
 
-  // July #1 — Shipped 3 Jul (13 items, 4792g billed)
-  { name:"Nike miler short set Black #1",  order:"July #1",   status:"Waiting shipment", list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
-  { name:"Nike miler short set Black #2",  order:"July #1",   status:"Waiting shipment", list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
-  { name:"Nike miler short set Black #3",  order:"July #1",   status:"Waiting shipment", list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
-  { name:"Nike miler short set Green #1",  order:"July #1",   status:"Waiting shipment", list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
-  { name:"Nike miler short set Green #2",  order:"July #1",   status:"Waiting shipment", list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
-  { name:"UA compression shirt black #1",  order:"July #1",   status:"Waiting shipment", list:19.99, sold:null, cost:3.405,  shipping:3.14, dateSold:null },
-  { name:"UA compression shirt black #2",  order:"July #1",   status:"Waiting shipment", list:19.99, sold:null, cost:3.405,  shipping:3.14, dateSold:null },
-  { name:"UA compression shirt black #3",  order:"July #1",   status:"Waiting shipment", list:19.99, sold:null, cost:3.405,  shipping:3.14, dateSold:null },
-  { name:"UA compression shirt black #4",  order:"July #1",   status:"Waiting shipment", list:19.99, sold:null, cost:3.405,  shipping:3.14, dateSold:null },
-  { name:"Essential shorts black #1",      order:"July #1",   status:"Waiting shipment", list:29.99, sold:null, cost:7.705,  shipping:6.80, dateSold:null },
-  { name:"Essential shorts black #2",      order:"July #1",   status:"Waiting shipment", list:29.99, sold:null, cost:7.705,  shipping:6.80, dateSold:null },
-  { name:"Bape Polo black",                order:"July #1",   status:"Waiting shipment", list:34.99, sold:null, cost:13.54,  shipping:3.84, dateSold:null },
-  { name:"Bape Polo white",                order:"July #1",   status:"Waiting shipment", list:34.99, sold:null, cost:10.16,  shipping:3.84, dateSold:null },
+  // July #1 — Received into stock (13 items, 4792g billed)
+  { name:"Nike miler short set Black #1",  order:"July #1",   status:"Listed",           list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
+  { name:"Nike miler short set Black #2",  order:"July #1",   status:"Stock",            list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
+  { name:"Nike miler short set Black #3",  order:"July #1",   status:"Stock",            list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
+  { name:"Nike miler short set Green #1",  order:"July #1",   status:"Stock",            list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
+  { name:"Nike miler short set Green #2",  order:"July #1",   status:"Stock",            list:34.99, sold:null, cost:8.612,  shipping:5.40, dateSold:null },
+  { name:"UA compression shirt black #1",  order:"July #1",   status:"Stock",            list:19.99, sold:null, cost:3.405,  shipping:3.14, dateSold:null },
+  { name:"UA compression shirt black #2",  order:"July #1",   status:"Stock",            list:19.99, sold:null, cost:3.405,  shipping:3.14, dateSold:null },
+  { name:"UA compression shirt black #3",  order:"July #1",   status:"Listed",           list:19.99, sold:null, cost:3.405,  shipping:3.14, dateSold:null },
+  { name:"UA compression shirt black #4",  order:"July #1",   status:"Stock",            list:19.99, sold:null, cost:3.405,  shipping:3.14, dateSold:null },
+  { name:"Essential shorts black #1",      order:"July #1",   status:"Stock",            list:29.99, sold:null, cost:7.705,  shipping:6.80, dateSold:null },
+  { name:"Essential shorts black #2",      order:"July #1",   status:"Stock",            list:29.99, sold:null, cost:7.705,  shipping:6.80, dateSold:null },
+  { name:"Bape Polo black",                order:"July #1",   status:"Sold",             list:29.99, sold:27,   cost:13.54,  shipping:3.84, dateSold:"2026-07-16" },
+  { name:"Bape Polo white",                order:"July #1",   status:"Stock",            list:34.99, sold:null, cost:10.16,  shipping:3.84, dateSold:null },
 
   // August #1 — In Warehouse (shipping fees not yet known)
   { name:"Stanley Cup Pink",               order:"August #1", status:"Waiting shipment", list:24.99, sold:null, cost:2.87,   shipping:0,    dateSold:null },
@@ -308,12 +309,12 @@ const fc = n => {
   const v = parseFloat(n);
   return `<span class="${v >= 0 ? 'pos' : 'neg'}">${v >= 0 ? '+' : ''}£${Math.abs(v).toFixed(2)}</span>`;
 };
-const bc = s => ({ Sold:'s-sold', Shipped:'s-shipped', Listed:'s-listed', Returned:'s-returned', 'Waiting shipment':'s-waiting', Ordered:'s-ordered' }[s] || 's-listed');
+const bc = s => ({ Sold:'s-sold', Shipped:'s-shipped', Listed:'s-listed', Stock:'s-listed', Returned:'s-returned', 'Waiting shipment':'s-waiting', Ordered:'s-ordered' }[s] || 's-listed');
 
 // Statuses where item costs are committed (purchased)
-const COST_COMMITTED = new Set(['Ordered', 'Waiting shipment', 'Shipped', 'Sold', 'Listed']);
+const COST_COMMITTED = new Set(['Ordered', 'Waiting shipment', 'Shipped', 'Sold', 'Listed', 'Stock']);
 // Shipping is committed once allocated (shipping > 0 means the order's fees are paid)
-const SHIP_COMMITTED = new Set(['Ordered', 'Waiting shipment', 'Shipped', 'Sold', 'Listed']);
+const SHIP_COMMITTED = new Set(['Ordered', 'Waiting shipment', 'Shipped', 'Sold', 'Listed', 'Stock']);
 
 let donutChart = null, barChart = null, earnChart = null;
 
